@@ -1,0 +1,236 @@
+html,
+body,
+header,
+.view {
+
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*opacity: 0.5;*/
+}
+
+.section {
+    height: 100vh;
+    padding-top: 70px;
+    position: relative;
+}
+
+#home {
+    background-image: url("https://lnu.edu.ua/wp-content/uploads/2015/01/LNU_4_006.jpg");
+}
+
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+        height: 100vh;
+    }
+}
+
+.top-nav-collapse {
+    background-color: #78909c !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+    background: transparent !important;
+}
+
+@media (max-width: 991px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #78909c !important;
+    }
+}
+
+h1 {
+    letter-spacing: 8px;
+}
+
+h5 {
+    letter-spacing: 3px;
+}
+
+.hr-light {
+    border-top: 3px solid #fff;
+    width: 80px;
+}
+
+.container {
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+.button {
+    background-color: #002561;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.but {
+    background-color: #002561;
+    color: #002561;
+}
+
+.button1 {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    width: 50%;
+    height: 10%;
+}
+
+.a {
+    color: white;
+}
+
+
+.site-title {
+    font-size: 36px;
+    line-height: 24px;
+    letter-spacing: .075em;
+    margin-bottom: 10px;
+    padding-top: 25px;
+    color: #002561;
+    text-align: center;
+}
+
+.site-header-main {
+    background-color: #fff;
+    border-bottom: 1px solid #f7f4ec;
+    padding-bottom: 5px;
+    padding-top: 13px;
+}
+
+.site-header-main .wrap {
+    position: relative;
+}
+
+.site-header-main .wrap {
+    position: relative;
+}
+
+.site-logo {
+    width: 70px;
+    height: 73px;
+    margin-right: 30px;
+    background-image: url(//admission.lnu.edu.ua/wp-content/themes/lnu-admission/lib/images/logos/main.png);
+    overflow: hidden;
+    display: block;
+    float: left;
+}
+
+
+.wrap {
+    padding: 0 10px;
+    max-width: 950px;
+    margin: 0 auto
+}
+
+
+.page-content p {
+    margin-bottom: 24px
+}
+
+.page-content ol, .page-content ul {
+    margin-bottom: 24px
+}
+
+.page-content li {
+    padding-right: 40px;
+    position: relative;
+    left: 40px
+}
+
+.page-content blockquote {
+    border-left: 1px solid #e1e1e1;
+    margin: 24px 0 24px 40px;
+    padding-left: 20px
+}
+
+.page-content blockquote p {
+    margin-bottom: 18px
+}
+
+.page-content img, .page-content iframe {
+    max-width: 100%
+}
+
+.page-content .tabs-list {
+    padding-bottom: 25px;
+    margin: 0 -5px;
+    font-size: 0
+}
+#faculty thead{
+    background-color: #002561;
+    color: whitesmoke;
+}
+#faculty thead:hover{
+    background-color: #002775;
+}
+
+.page-content .tabs-list .item {
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #fff;
+    display: inline-block;
+    margin: 0 5px 8px;
+    padding: 6px 25px
+}
+
+.page-content .tabs-list .item.active {
+    border-color: #f8b502;
+    color: #002561
+}
+
+.page-content .tabs-list .item:not(.active) {
+    cursor: pointer;
+    border-color: #fff;
+    color: #005ffc
+}
+
+.page-content .tab.active {
+    display: block
+}
+
+.page-content .tab:not(.active) {
+    display: none
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#f5f5f5;
+text-decoration-color: #002561;
+    color: #002561;}
+
