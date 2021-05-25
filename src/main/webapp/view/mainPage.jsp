@@ -16,7 +16,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <header>
     <div class="section" id="home">
         <div class="row">

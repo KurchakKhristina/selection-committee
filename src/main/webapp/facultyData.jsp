@@ -26,7 +26,7 @@
         response.sendRedirect("index.jsp");
     }
 %>
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 <c:set value="Admin" var="admin"/>
 <c:set value="User" var="user"/>
 <div class="col-sm-9 col-md-6 " style="margin-top: 40px">
@@ -145,7 +145,7 @@
                                                        placeholder="Оцінка з атетстату"
                                                        name="certificateMark">
                                             </div>
-<%--                                            <input class="invisible" name="subjectId" value="${subject_list.id}">--%>
+                                            <input class="invisible" name="subjectId" value="${subject_list.id}">
                                         </div>
                                     </td>
                                     </tbody>
@@ -154,8 +154,10 @@
                         </div>
 
                         <div class="modal-footer pb-0">
+                            <form action="facultyInfo" method="post">
                             <input class="invisible" name="faculty_id" value="${temp_faculty.id}">
                             <input class="btn btn-success" type="submit" value="Save">
+                            </form>
                         </div>
                     </form>
                 </div>
@@ -185,39 +187,39 @@
                             <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty .id}' />"/>
 
                         <fieldset class="form-group">
-                            <label>User Name</label> <input type="text"
+                            <label>Назва</label> <input type="text"
                                                             value="<c:out value='${temp_faculty.name}' />"
                                                             class="form-control"
                                                             name="name" required="required">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>User Email</label> <input type="number"
+                            <label>Загальна кількість місць</label> <input type="number"
                                                              value="<c:out value='${temp_faculty.count_of_places}' />"
                                                              class="form-control"
                                                              name="count_of_places">
                         </fieldset>
                         <fieldset class="form-group">
-                            <label>User Email</label> <input type="number"
+                            <label>Кількість державних місць</label> <input type="number"
                                                              value="<c:out value='${temp_faculty.count_of_public_places}' />"
                                                              class="form-control"
                                                              name="count_of_public_places">
                         </fieldset>
                         <fieldset class="form-group">
-                            <label>User Email</label> <input type="number"
+                            <label>Кількість платних місць</label> <input type="number"
                                                              value="<c:out value='${temp_faculty.count_of_paid_places}' />"
                                                              class="form-control"
                                                              name="count_of_paid_places">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>User Country</label> <input type="text"
+                            <label>Опис</label> <input type="text"
                                                                value="<c:out value='${temp_faculty.description}' />"
                                                                class="form-control"
                                                                name="description">
                         </fieldset>
                         <fieldset class="form-group">
-                            <label>User Country</label> <input type="text"
+                            <label>Посилання на Лого</label> <input type="text"
                                                                value="<c:out value='${temp_faculty.logo}' />"
                                                                class="form-control"
                                                                name="logo">
@@ -250,11 +252,12 @@
 
                 </div>
                 <div class="modal-footer pb-0">
-                    <form action="facultyList">
-                        <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty .id}' />"/>
+                    <form action="facultyList" method="post">
+                        <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty.id}' />"/>
                     <input class="invisible" name="action" value="delete">
                     <input class="btn btn-success" type="submit" value="Видалити">
                     </form>
+
                 </div>
             </div>
         </div>

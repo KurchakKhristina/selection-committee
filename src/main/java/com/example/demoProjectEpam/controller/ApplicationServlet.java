@@ -72,7 +72,8 @@ public class ApplicationServlet extends HttpServlet {
 
         applicationDao.addApplication( facultyID, userID);
 
-        markDao.addMark(userID,request.getParameterMap());
+            markDao.addMark(userID,request.getParameterMap());
+
 
         response.sendRedirect("facultyList#faculty");
     }

@@ -29,7 +29,7 @@
         response.sendRedirect("index.jsp");
     }
 %>
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 <div class="col-sm-9 col-md-6 " style="margin-top: 40px">
     <div class="col d-flex align-items-center" style="text-align: center">
         <h2 style="text-align: center">Абітурієнт №${temp_user.id}</h2>

@@ -25,21 +25,18 @@ public class UserCabinetServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        Integer userID = (Integer) session.getAttribute("userId");
+        Integer userID = Integer.parseInt(request.getParameter(("userId")));
         System.out.println(userID);
-        request.setAttribute("userId",userID);
-//        session.setAttribute("id", session.getId());
+        session.setAttribute("id", session.getId());
 
         User user = usersDao.getUsersById(userID);
         request.setAttribute("temp_u", user);
 
         List<Faculty> faculty = applicationDao.getAplicationByUserId(userID);
         for (Faculty faculty1 : faculty) {
-            System.out.println(String.valueOf(faculty1.toString()));
+            System.out.println((faculty1));
         }
         request.setAttribute("f_tamp", faculty);
-
-
 
         request.getRequestDispatcher("UserCabinet.jsp").forward(request,response);
     }

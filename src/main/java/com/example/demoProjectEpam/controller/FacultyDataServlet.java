@@ -34,6 +34,7 @@ public class FacultyDataServlet extends HttpServlet {
         List<Subject> subjects = facultyDao.getSubjectOnFacultyBYId(facultyID);
         request.setAttribute("subject_list", subjects);
         System.out.println(subjects);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("facultyData.jsp");
         dispatcher.forward(request, response);
 

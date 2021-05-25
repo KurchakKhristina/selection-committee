@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 
 <div style="width: 100%" class="row justify-content-md-center mt-5">
     <div class="col col-lg-3">

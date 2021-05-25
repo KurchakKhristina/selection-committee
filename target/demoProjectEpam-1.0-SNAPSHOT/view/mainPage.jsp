@@ -14,10 +14,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <header>
     <div class="section" id="home">
         <div class="row">
@@ -97,7 +96,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2021 Copyright:
-        <a class="text-white" href="/">SmartOwl.com</a>
+        <a class="text-white" href="/">SelectionCommittee.com</a>
     </div>
     <!-- Copyright -->
 </footer>

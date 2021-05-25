@@ -150,8 +150,7 @@ public class UsersDao implements UserRepository {
         ResultSet resultSet = null;
 
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql))
-        {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
@@ -185,8 +184,7 @@ public class UsersDao implements UserRepository {
         ResultSet resultSet = null;
 
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql))
-        {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
@@ -213,12 +211,13 @@ public class UsersDao implements UserRepository {
 
         return user;
     }
+
     public int getId(String login) {
         String sql = "select id from users where email = ?";
         ResultSet resultSet = null;
 
-        try(Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, login);
 
@@ -242,8 +241,8 @@ public class UsersDao implements UserRepository {
 
         ResultSet resultSet = null;
 
-        try(Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, login);
             statement.setString(2, password);
@@ -262,5 +261,54 @@ public class UsersDao implements UserRepository {
         }
 
         return null;
+    }
+
+    //    public void blockUser(int id) {
+//        String sql = "update users set blocked=true where id = ?";
+//        Connection connection = null;
+//
+//        try {
+//            connection = dbManager.getConnection();
+//            connection.setAutoCommit(false);
+//            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+//            PreparedStatement statement = connection.prepareStatement(sql);
+//            int k = 0;
+//
+//            statement.setInt(++k,id);
+//
+//        } catch (SQLException | NamingException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public void blockUser(int id) {
+        String sql = "update users set blocked=true where id = ?";
+        ResultSet resultSet = null;
+
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unBlockUser(int id) {
+        String sql = "update users set blocked= default where id = ?";
+        Connection connection = null;
+
+        try {
+            connection = dbManager.getConnection();
+            connection.setAutoCommit(false);
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int k = 0;
+
+            statement.setInt(++k, id);
+
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+        }
     }
 }

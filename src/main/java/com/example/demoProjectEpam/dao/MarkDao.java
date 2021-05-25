@@ -1,6 +1,7 @@
 package com.example.demoProjectEpam.dao;
 
 import com.example.demoProjectEpam.DBManager;
+import com.example.demoProjectEpam.entity.Subject;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -17,7 +18,7 @@ public class MarkDao {
     public MarkDao() {
         dbManager = new DBManager();
     }
-    public boolean addMark(int userId,Map<String, String[]> parametersMap) {
+    public void addMark(int userId, Map<String, String[]> parametersMap) {
         String sql = "insert into mark values(default,?,?, ?, ?)";
 
         try (Connection connection = dbManager.getConnection();
@@ -34,13 +35,12 @@ public class MarkDao {
 
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
-            return false;
+
         }
-        return true;
     }
 
-    public boolean addMarksForUser(){
-return false;
+    public void addMarksForUser(){
+
     }
 
 }

@@ -25,7 +25,7 @@
     }
 %>
 
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 
 <div class="section" id="home">
     <div class="row">
@@ -86,7 +86,7 @@
                 <tbody>
                 <tr>
                     <c:url var="userLink" value="UserInfo">
-                        <c:param name="userID" value="${user_list.id}"/>
+                        <c:param name="userId" value="${user_list.id}"/>
                     </c:url>
 
                     <td>
@@ -99,6 +99,7 @@
                     <td><c:out value="${user_list.lastName}"/></td>
                     <td><c:out value="${user_list.firstName}"/></td>
                     <td><c:out value="${user_list.surName}"/></td>
+
                 </tr>
                 </tbody>
             </c:forEach>

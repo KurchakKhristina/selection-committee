@@ -31,7 +31,7 @@
         response.sendRedirect("index.jsp");
     }
 %>
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 <div class="section" id="home">
     <div class="row">
         <div class="center">

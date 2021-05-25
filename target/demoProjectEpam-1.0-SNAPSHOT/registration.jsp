@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<%@ include file="view/header.jsp" %>
+<%@ include file="header.jsp" %>
 
 <br/>
 <div style="width: 100%" class="row justify-content-md-center mt-10">

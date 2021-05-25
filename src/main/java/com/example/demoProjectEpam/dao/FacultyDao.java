@@ -90,14 +90,11 @@ public class FacultyDao {
         try (Connection connection = dbManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.execute();
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 
