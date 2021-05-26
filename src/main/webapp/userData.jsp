@@ -67,7 +67,7 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title">Заблокувати користува</h5>
+                            <h5 class="modal-title">Заблокувати користувача</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -77,7 +77,7 @@
 
                         </div>
                         <div class="modal-footer pb-0">
-                            <form action="UserInfo">
+                            <form method="post" action="admin">
                                 <input type="hidden" name="userID" value="<c:out value='${temp_user.id}' />"/>
                                 <input class="invisible" name="isBlocked" value="block">
                                 <input class="btn btn-success" type="submit" value="Заблокувати">

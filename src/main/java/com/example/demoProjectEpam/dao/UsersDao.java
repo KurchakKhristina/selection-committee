@@ -263,25 +263,9 @@ public class UsersDao implements UserRepository {
         return null;
     }
 
-    //    public void blockUser(int id) {
-//        String sql = "update users set blocked=true where id = ?";
-//        Connection connection = null;
-//
-//        try {
-//            connection = dbManager.getConnection();
-//            connection.setAutoCommit(false);
-//            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            int k = 0;
-//
-//            statement.setInt(++k,id);
-//
-//        } catch (SQLException | NamingException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     public void blockUser(int id) {
-        String sql = "update users set blocked=true where id = ?";
+        String sql = "update users set blocked = 1 where id = ?";
         ResultSet resultSet = null;
 
         try (Connection connection = dbManager.getConnection();
@@ -293,6 +277,9 @@ public class UsersDao implements UserRepository {
             e.printStackTrace();
         }
     }
+
+
+
 
     public void unBlockUser(int id) {
         String sql = "update users set blocked= default where id = ?";

@@ -49,6 +49,33 @@
             </div>
         </div>
         </c:when>
+        <c:when test="${temp_user.blocked == 1 }">
+
+        <a href="#faculty" class="button button2  btn-lg" data-toggle="modal">Обрати факультет</a>
+    </div>
+    <!--Grid column-->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="faculty" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLongTitle">Помилка</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   Ваш акаунт заблокований адміністратором!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </c:when>
         <c:otherwise>
         <a href="facultyList#faculty" class="button button2  btn-lg" >Обрати факультет</a>
     </div>

@@ -34,10 +34,20 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        facultyDao.addFaculty(request.getParameterMap());
 
-        ServletContext servletContext = getServletContext();
-        RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/welcome_admin.jsp");
-        dispatcher.forward(request, response);
+        int userID = Integer.parseInt((request.getParameter("userID")));
+        String isBlocked = request.getParameter("isBlocked");
+
+        switch (isBlocked) {
+            case "block":
+                usersDao.blockUser(userID);
+                response.sendRedirect("admin#users");
+                break;
+            case "unblock":
+                usersDao.unBlockUser(userID);
+                response.sendRedirect("admin#users");
+                break;
+
+        }
     }
 }

@@ -30,11 +30,14 @@
     }
 %>
 <%@ include file="header.jsp" %>
+<c:if test="${temp_u.blocked==1}">
 <div class="col-sm-9 col-md-6 " style="margin-top: 40px">
     <div class="col d-flex align-items-center" style="text-align: center">
-        <h2 style="text-align: center">Абітурієнт №${temp_user.id}</h2>
+        <h2 style="text-align: center">Ви не можете переглянти дані Ваш акаунт заблоковано адміністратором!</h2>
     </div>
 </div>
+</c:if>
+<c:if test="${temp_u.blocked==0}">
 <div class="row row-cols-2">
     <div class="col-sm-4" style="margin-left: 60px">
         <div class="page-content" style="margin-top: 40px">
@@ -60,14 +63,15 @@
                     <div class="tab info active" style="display: block">
                         <h4>Я подала заявки на факультети:</h4>
                         <div class="m-2">
-<%--                            <c:forEach items="${f_temp}" var="f_list">--%>
 
                             <table class="table table-hover">
+                                <c:forEach items="${f_temp}" var="f_list">
                                     <tbody>
-                                    <td>Факультет управління фінансами та бізнесу</td>
-                                        <td><c:out value="${f_list}"/></td>
+                                    <tr>
+                                    <td><c:out value="${f_list.name}"/></td>
+                                    </tr>
                                     </tbody>
-<%--                                </c:forEach>--%>
+                                </c:forEach>
                             </table>
 
                         </div>
@@ -77,5 +81,5 @@
         </div>
     </div>
 </div>
-
+</c:if>
 </body>

@@ -18,28 +18,37 @@ public class MarkDao {
     public MarkDao() {
         dbManager = new DBManager();
     }
-    public void addMark(int userId, Map<String, String[]> parametersMap) {
-        String sql = "insert into mark values(default,?,?, ?, ?)";
 
-        try (Connection connection = dbManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+    /*examMark
+    certificateMark*/
+    public void addMarks(int userId, Map<String, String[]> parametersMap) {
+        for (String s : parametersMap.keySet()) {
+            if (!s.equals("faculty_id")) {
+                String[] array = s.split("_");
+                String table = null;
 
-            int k = 0;
-            statement.setString(++k, parametersMap.get("subjectId")[0]);
-            statement.setInt(++k, userId);
-            statement.setString(++k, parametersMap.get("examMark")[0]);
-            statement.setString(++k, parametersMap.get("certificateMark")[0]);
+                if (array[0].equals("examMark")) table = "exammark";
+                else if (array[0].equals("certificateMark")) table = "certificatemark";
 
-            statement.execute();
-            System.out.println("mark insert");
+                String sql = "insert into " + table + " values(default, ?, ?, ?)";
 
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+                try (Connection connection = dbManager.getConnection();
+                     PreparedStatement statement = connection.prepareStatement(sql)) {
 
+                    int k = 0;
+                    statement.setString(++k, array[1]);
+                    statement.setInt(++k, userId);
+                    statement.setString(++k, parametersMap.get(s)[0]);
+
+                    statement.execute();
+                    System.out.println("mark insert");
+
+                } catch (SQLException | NamingException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-    }
 
-    public void addMarksForUser(){
 
     }
 

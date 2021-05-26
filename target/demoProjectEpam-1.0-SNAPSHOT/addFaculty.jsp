@@ -23,11 +23,11 @@
 <%@ include file="header.jsp" %>
 
 <br/>
-<div  style="width: 100%" class="row justify-content-md-center mt-10"">
+<div  style="width: 100%" class="row justify-content-md-center mt-10">
     <div class="col col-auto">
         <h1 class="text-center mb-4">Новий факультет</h1>
         <form class="needs-validation m-2" novalidate
-              method="post" action="admin">
+              method="post" action="facultyList">
             <br/>
                 <div>
                     <label class="form-text text-muted"
@@ -74,14 +74,12 @@
                         Please enter Count_of_places.
                     </div>
                 </div>
-
-
                 <hr>
                 <div class="row">
+                    <input class="invisible" name="action" value="add">
                     <input class="mt-3 ml-3 mr-3 col btn btn-warning"
                            type="submit" value="Додати факультет">
                 </div>
-            </div>
         </form>
     </div>
 </div>

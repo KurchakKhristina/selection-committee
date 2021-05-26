@@ -44,7 +44,7 @@
             <thead>
             <tr>
                 <td>Назва</td>
-                <td>Кількість містць</td>
+                <td>Кількість місць</td>
             </tr>
             </thead>
             <c:forEach items="${faculty_list}" var="faculty_list">
@@ -99,14 +99,11 @@
                     <td><c:out value="${user_list.lastName}"/></td>
                     <td><c:out value="${user_list.firstName}"/></td>
                     <td><c:out value="${user_list.surName}"/></td>
-
                 </tr>
                 </tbody>
             </c:forEach>
         </table>
-
     </div>
-
 </div>
 </body>
 <footer class="bg-dark text-center text-white "> <!--'fixed-bottom'-->

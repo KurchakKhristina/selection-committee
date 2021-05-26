@@ -27,52 +27,62 @@
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
-    if (session.getAttribute("id") != session.getId() ) {
+    if (session.getAttribute("id") != session.getId()) {
         response.sendRedirect("index.jsp");
     }
 %>
 <%@ include file="header.jsp" %>
 <div class="section" id="home">
-    <div class="row">
-        <div class="center">
-
-            <a href="#faculty" class="button button2 btn-lg scroll-btn" data-target="#faculty">Обрати факультет</a>
+    <c:if test="${temp_user.blocked == 0}">
+        <div class="row">
+            <div class="center">
+                <a href="#faculty" class="button button2 btn-lg scroll-btn" data-target="#faculty">Обрати факультет</a>
+            </div>
         </div>
-    </div>
+        <div class="section" id="faculty">
+            <div class="m-2">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td>Назва</td>
+                        <td>Кількість місць</td>
+                    </tr>
+                    </thead>
+                    <c:forEach items="${faculty_list}" var="faculty_list">
+                        <tbody>
+                        <tr>
+                            <c:url var="facultyLink" value="facultyInfo">
+                                <c:param name="facultyID" value="${faculty_list.id}"/>
+                            </c:url>
+
+                            <td>
+                                <a style="text-decoration: blue" href="${facultyLink}">
+                                    <button class="btn btn-light but">
+                                            ${faculty_list.name}
+                                    </button>
+                                </a>
+                            </td>
+                            <td><c:out value="${faculty_list.count_of_places}"/></td>
+                        </tr>
+                        </tbody>
+                    </c:forEach>
+                </table>
+
+            </div>
+        </div>
+
+    </c:if>
 </div>
-
-<div class="section" id="faculty">
-    <div class="m-2">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <td>Назва</td>
-                <td>Кількість місць</td>
-            </tr>
-            </thead>
-            <c:forEach items="${faculty_list}" var="faculty_list">
-                <tbody>
-                <tr>
-                    <c:url var="facultyLink" value="facultyInfo">
-                        <c:param name="facultyID" value="${faculty_list.id}"/>
-                    </c:url>
-
-                    <td>
-                        <a style="text-decoration: blue" href="${facultyLink}">
-                            <button class="btn btn-light but">
-                                    ${faculty_list.name}
-                            </button>
-                        </a>
-                    </td>
-                    <td><c:out value="${faculty_list.count_of_places}"/></td>
-                </tr>
-                </tbody>
-            </c:forEach>
-        </table>
-
-    </div>
-</div>
+<c:if test="${temp_user.blocked != 0}">
+        <div class="row">
+            <div class="center " >
+                    <div class="col d-flex align-items-center bg-danger text-white" style="text-align: center">
+                        <h2 class="text-center" style="margin-left:50px;text-align: center">Ви не можете переглянти дані.
+                            Ваш акаунт заблоковано адміністратором!</h2>
+                    </div>
+                </div>
+            </div>
+</c:if>
 </body>
-
 </html>
 

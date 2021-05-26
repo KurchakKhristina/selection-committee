@@ -35,21 +35,5 @@ public class UserDataServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        int userID = (Integer) (session.getAttribute("userID"));
-        String isBlocked = request.getParameter("isBlocked");
-
-        switch (isBlocked) {
-            case "block":
-                usersDao.blockUser(userID);
-                response.sendRedirect("admin#users");
-                break;
-            case "unblock":
-                usersDao.unBlockUser(userID);
-                response.sendRedirect("admin#users");
-                break;
-
-        }
     }
 }

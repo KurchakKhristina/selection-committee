@@ -52,7 +52,8 @@
             <div class="wrap">
                 <div class="tabs-container">
                     <div class="tab info active" id="logo" style="display: block">
-                        <div style="background-image: url("${temp_faculty.logo}")">
+                        <div style="background-image: url("
+                        ${temp_faculty.logo}")">
                         <img src="${temp_faculty.logo}" alt="">
 
                     </div>
@@ -132,20 +133,20 @@
 
                             <label class="mt-2 form-text text-muted">Предмети для вступу</label>
                             <table class="table table-hover">
-                                <c:forEach items="${subject_list}" var="subject_list">
+                                <c:forEach items="${subject_list}" var="subject">
                                     <tbody>
-                                    <td><c:out value="${subject_list.name}"/>
+                                    <td>
+                                        <c:out value="${subject.name}"/>
                                         <div class="form-row">
                                             <div class="col">
                                                 <input type="number" class="form-control" id="examMark"
-                                                       placeholder="Оцінка за екзамен" name="examMark">
+                                                       placeholder="Оцінка за екзамен" name="examMark_${subject.id}">
                                             </div>
                                             <div class="col">
                                                 <input type="number" class="form-control" id="certificateMark"
-                                                       placeholder="Оцінка з атетстату"
-                                                       name="certificateMark">
+                                                       placeholder="Оцінка з атетстату" name="certificateMark_${subject.id}">
                                             </div>
-                                            <input class="invisible" name="subjectId" value="${subject_list.id}">
+<%--                                            <input class="invisible" name="subjectId" value="${subject.id}">--%>
                                         </div>
                                     </td>
                                     </tbody>
@@ -155,8 +156,8 @@
 
                         <div class="modal-footer pb-0">
                             <form action="facultyInfo" method="post">
-                            <input class="invisible" name="faculty_id" value="${temp_faculty.id}">
-                            <input class="btn btn-success" type="submit" value="Save">
+                                <input class="invisible" name="faculty_id" value="${temp_faculty.id}">
+                                <input class="btn btn-success" type="submit" value="Save">
                             </form>
                         </div>
                     </form>
@@ -165,135 +166,139 @@
             </div>
         </div>
     </div>
-<c:if test="${role == admin}">
-<div class="row">
-    <div class="m-2">
-        <button style="margin-right: auto" class="btn btn-warning" data-toggle="modal" data-target="#edit">Редагувати факультет</button>
-    </div>
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <c:if test="${role == admin}">
+    <div class="row">
+        <div class="m-2">
+            <button style="margin-right: auto" class="btn btn-warning" data-toggle="modal" data-target="#edit">
+                Редагувати факультет
+            </button>
+        </div>
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
 
-            <div class="modal-content">
+                <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title">Редагувати факультет</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-0">
-                    <form action="facultyList" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Редагувати факультет</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pb-0">
+                        <form action="facultyList" method="post">
 
                             <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty .id}' />"/>
 
-                        <fieldset class="form-group">
-                            <label>Назва</label> <input type="text"
+                            <fieldset class="form-group">
+                                <label>Назва</label> <input type="text"
                                                             value="<c:out value='${temp_faculty.name}' />"
                                                             class="form-control"
                                                             name="name" required="required">
-                        </fieldset>
+                            </fieldset>
 
-                        <fieldset class="form-group">
-                            <label>Загальна кількість місць</label> <input type="number"
-                                                             value="<c:out value='${temp_faculty.count_of_places}' />"
-                                                             class="form-control"
-                                                             name="count_of_places">
-                        </fieldset>
-                        <fieldset class="form-group">
-                            <label>Кількість державних місць</label> <input type="number"
-                                                             value="<c:out value='${temp_faculty.count_of_public_places}' />"
-                                                             class="form-control"
-                                                             name="count_of_public_places">
-                        </fieldset>
-                        <fieldset class="form-group">
-                            <label>Кількість платних місць</label> <input type="number"
-                                                             value="<c:out value='${temp_faculty.count_of_paid_places}' />"
-                                                             class="form-control"
-                                                             name="count_of_paid_places">
-                        </fieldset>
+                            <fieldset class="form-group">
+                                <label>Загальна кількість місць</label> <input type="number"
+                                                                               value="<c:out value='${temp_faculty.count_of_places}' />"
+                                                                               class="form-control"
+                                                                               name="count_of_places">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label>Кількість державних місць</label> <input type="number"
+                                                                                value="<c:out value='${temp_faculty.count_of_public_places}' />"
+                                                                                class="form-control"
+                                                                                name="count_of_public_places">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label>Кількість платних місць</label> <input type="number"
+                                                                              value="<c:out value='${temp_faculty.count_of_paid_places}' />"
+                                                                              class="form-control"
+                                                                              name="count_of_paid_places">
+                            </fieldset>
 
-                        <fieldset class="form-group">
-                            <label>Опис</label> <input type="text"
-                                                               value="<c:out value='${temp_faculty.description}' />"
-                                                               class="form-control"
-                                                               name="description">
-                        </fieldset>
-                        <fieldset class="form-group">
-                            <label>Посилання на Лого</label> <input type="text"
-                                                               value="<c:out value='${temp_faculty.logo}' />"
-                                                               class="form-control"
-                                                               name="logo">
-                        </fieldset>
-                        <div class="modal-footer pb-0">
-                            <input class="invisible" name="action" value="update">
-                            <input class="btn btn-success" type="submit" value="Save">
-                        </div>
-                    </form>
+                            <fieldset class="form-group">
+                                <label>Опис</label> <input type="text"
+                                                           value="<c:out value='${temp_faculty.description}' />"
+                                                           class="form-control"
+                                                           name="description">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label>Посилання на Лого</label> <input type="text"
+                                                                        value="<c:out value='${temp_faculty.logo}' />"
+                                                                        class="form-control"
+                                                                        name="logo">
+                            </fieldset>
+                            <div class="modal-footer pb-0">
+                                <input class="invisible" name="action" value="update">
+                                <input class="btn btn-success" type="submit" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-2">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#delete" style="margin-left: auto">Видалити
+                факультет
+            </button>
+        </div>
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Видалити факультет</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pb-0">
+                        <p>Ви дійсно хочете видалити ${faculty_temp.name}?</p>
+
+                    </div>
+                    <div class="modal-footer pb-0">
+                        <form action="facultyList" method="post">
+                            <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty.id}' />"/>
+                            <input class="invisible" name="action" value="delete">
+                            <input class="btn btn-success" type="submit" value="Видалити">
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="m-2">
-        <button class="btn btn-danger" data-toggle="modal" data-target="#delete" style="margin-left: auto">Видалити факультет</button>
-    </div>
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    </c:if>
 
-            <div class="modal-content">
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 
-                <div class="modal-header">
-                    <h5 class="modal-title">Видалити факультет</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-0">
-                    <p>Ви дійсно хочете видалити ${faculty_temp.name}?</p>
-
-                </div>
-                <div class="modal-footer pb-0">
-                    <form action="facultyList" method="post">
-                        <input type="hidden" name="facultyID" value="<c:out value='${temp_faculty.id}' />"/>
-                    <input class="invisible" name="action" value="delete">
-                    <input class="btn btn-success" type="submit" value="Видалити">
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</c:if>
-
-        <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function () {
-                'use strict';
-                window.addEventListener('load', function () {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function (form) {
-                        form.addEventListener('submit', function (event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-        </script>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
 </body>

@@ -15,24 +15,23 @@ import java.sql.SQLException;
 @WebServlet(name = "FacultyListServlet", value = "/facultyList")
 public class FacultyListServlet extends HttpServlet {
     private FacultyDao facultyDao;
-    private ApplicationDao applicationDao;
+    private UsersDao usersDao;
 
 
     @Override
     public void init() throws ServletException {
         facultyDao = new FacultyDao();
-        applicationDao = new ApplicationDao();
+        usersDao = new UsersDao();
 
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(12);
-
         request.setAttribute("faculty_list", facultyDao.getFaculty());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("welcom_user.jsp");
         dispatcher.forward(request, response);
+        request.setAttribute("user_list",usersDao.getUsers());
     }
 
     @Override
@@ -47,9 +46,12 @@ public class FacultyListServlet extends HttpServlet {
             case "update":
                 updateUser(request, response);
                 break;
+            case "add":
+                facultyDao.addFaculty(request.getParameterMap());
+                response.sendRedirect("admin");
+                break;
             default:
-                RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
-                dispatcher.forward(request, response);
+                response.sendRedirect("admin");
                 break;
         }
     }

@@ -30,7 +30,7 @@
                                 <li style="margin-left: 5px" class="nav-item active">
                                     <div class="wrap clearfix"><a class="site-logo" href="index.jsp"></a></div>
                                 </li>
-                                <c:if test="${username != null}">
+                                <c:if test="${role == 'User'}">
                                 <li style="margin-left: 5px" class="nav-item active">
                                     <input class="invisible" value="${userId}">
                                     <a class="btn btn-warning" type="button" href="myCabinetServlet">Мій кабінет</a>

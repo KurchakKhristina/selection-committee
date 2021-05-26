@@ -28,18 +28,16 @@ public class LoginServlet extends HttpServlet {
         User user = new User();
         String email = request.getParameter("login");
         int id = userDAO.getId(email);
-
         String password = request.getParameter("password");
 
         String role = (String) request.getAttribute("role");
 
-        if (role == null) response.sendRedirect("index.jsp");
+        if (role == null ) response.sendRedirect("index.jsp");
         else {
             HttpSession session = request.getSession();
             session.setAttribute("id", session.getId());
             session.setAttribute("username", email);
             session.setAttribute("userId", id);
-//            session.setAttribute("password", password);
             session.setAttribute("role", role);
 
             if (role.equals("User")) response.sendRedirect("facultyList");
