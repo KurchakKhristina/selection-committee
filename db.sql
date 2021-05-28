@@ -1,5 +1,4 @@
 USE selection_committee;
-DROP table if exists Mark;
 DROP table if exists application;
 DROP TABLE IF EXISTS USERS;
 DROP table if exists subject_on_faculty;
@@ -87,6 +86,29 @@ CREATE TABLE application
 );
 
 USE selection_committee;
+CREATE TABLE report
+(
+    id             int not null auto_increment primary key,
+    faculty_id     int,
+    application_id int,
+    status_id      int
+)
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+CREATE TABLE status
+(
+    id   int not null auto_increment primary key,
+    name boolean
+);
+
+ALTER TABLE application add column date datetime;
+
+USE selection_committee;
+ALTER TABLE report
+    add foreign key (faculty_id) references Faculty(ID);
+ALTER TABLE report
+    add foreign key (application_id) references application(ID);
 
 ALTER TABLE subject_on_faculty
     ADD foreign key (Faculty_id) references Faculty (ID);

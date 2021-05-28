@@ -77,6 +77,9 @@
             </div>
         </div>
     </div>
+    <br />
+    <br />
+    <br />
 </div>
 
 <div class="col">
@@ -101,6 +104,14 @@
             </div>
         </div>
     </div>
+<%--    <input class="invisible" value="userID">--%>
+<%--    <input class="invisible" value="facultyID">--%>
+    <c:choose>
+
+    <c:when test="${!applicationExist }">
+    <br />
+    <br />
+    <br />
     <div class="row">
         <div class="col"></div>
         <div class="col">
@@ -112,6 +123,9 @@
                 </div>
             </c:if>
         </div>
+        <br />
+        <br />
+        <br />
     </div>
 
     <div class="modal fade" id="new_application" tabindex="-1" role="dialog" aria-hidden="true">
@@ -166,7 +180,19 @@
             </div>
         </div>
     </div>
+    </c:when>
+    <c:otherwise>
+    <br/>
+    <h3>Ви вже подали зявку на цей факультет</h3>
+    <br />
+    <br />
+    <br />
+    </c:otherwise>
+    </c:choose>
     <c:if test="${role == admin}">
+   <br />
+   <br />
+   <br />
     <div class="row">
         <div class="m-2">
             <button style="margin-right: auto" class="btn btn-warning" data-toggle="modal" data-target="#edit">
@@ -267,6 +293,9 @@
                 </div>
             </div>
         </div>
+        <br />
+        <br />
+        <br />
     </div>
     </c:if>
 

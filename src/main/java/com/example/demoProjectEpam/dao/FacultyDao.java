@@ -152,7 +152,7 @@ public class FacultyDao {
 
 
     public boolean addFaculty(Map<String, String[]> parametersMap) {
-        String sql = "insert into faculty values(default,?,?, ?, ?,?,default)";
+        String sql = "insert into faculty values(default, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dbManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -163,6 +163,7 @@ public class FacultyDao {
             statement.setInt(++k, Integer.parseInt(parametersMap.get("Count_of_public_places")[0]));
             statement.setInt(++k, Integer.parseInt(parametersMap.get("Count_of_paid_places")[0]));
             statement.setString(++k, parametersMap.get("Description")[0]);
+            statement.setString(++k, parametersMap.get("ImgLogo")[0]);
 
             statement.execute();
             System.out.println(1);

@@ -27,11 +27,16 @@ public class FacultyListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        Integer userID = (Integer) session.getAttribute("userId");
+
         request.setAttribute("faculty_list", facultyDao.getFaculty());
+        request.setAttribute("user_list",usersDao.getUsersById(userID));
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("welcom_user.jsp");
         dispatcher.forward(request, response);
-        request.setAttribute("user_list",usersDao.getUsers());
     }
 
     @Override

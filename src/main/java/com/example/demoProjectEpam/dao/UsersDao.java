@@ -282,7 +282,7 @@ public class UsersDao implements UserRepository {
 
 
     public void unBlockUser(int id) {
-        String sql = "update users set blocked= default where id = ?";
+        String sql = "update users set blocked= 0 where id = ?";
         Connection connection = null;
 
         try {
@@ -297,5 +297,29 @@ public class UsersDao implements UserRepository {
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getRole(int id) {
+        String sql = "select role from users where id = ?";
+        ResultSet resultSet = null;
+
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("Role");
+            }
+
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+        }
+
+        return null;
     }
 }

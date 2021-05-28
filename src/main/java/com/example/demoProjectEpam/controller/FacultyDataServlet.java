@@ -1,5 +1,6 @@
 package com.example.demoProjectEpam.controller;
 
+import com.example.demoProjectEpam.dao.ApplicationDao;
 import com.example.demoProjectEpam.dao.FacultyDao;
 import com.example.demoProjectEpam.entity.Faculty;
 import com.example.demoProjectEpam.entity.Subject;
@@ -14,10 +15,14 @@ import java.util.List;
 @WebServlet(name = "SubjectListServlet", value = "/facultyInfo")
 public class FacultyDataServlet extends HttpServlet {
     FacultyDao facultyDao;
+    private ApplicationDao applicationDao;
+
 
     @Override
     public void init() throws ServletException {
         facultyDao = new FacultyDao();
+        applicationDao = new ApplicationDao();
+
     }
 
     @Override
@@ -25,8 +30,14 @@ public class FacultyDataServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int facultyID = Integer.parseInt(request.getParameter("facultyID"));
         System.out.println("*" + facultyID);
-        session.setAttribute("id", session.getId());
 
+        Integer userID = (Integer) session.getAttribute("userId");
+//        request.setAttribute("userID", userID);
+        System.out.println(userID);
+
+        boolean exist = applicationDao.checkIfApplicationExist(userID, facultyID);
+        System.out.println(exist);
+        request.setAttribute("applicationExist", exist);
 
         Faculty faculty = facultyDao.getFacultyById(facultyID);
         request.setAttribute("temp_faculty", faculty);

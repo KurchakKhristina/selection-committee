@@ -73,7 +73,7 @@
                             </button>
                         </div>
                         <div class="modal-body pb-0">
-                            <p>Ви дійсно хочете заблокувати користува ?</p>
+                            <p>Ви дійсно хочете заблокувати користувача ?</p>
 
                         </div>
                         <div class="modal-footer pb-0">
@@ -88,8 +88,34 @@
             </div>
         </c:if>
 
-        <c:if test="${temp_user.blocked == 1}">
-        <button class="btn btn-info mt-3" data-toggle="modal" data-target="#feedback">Розблокувати</button>
+        <c:if test="${temp_user.blocked !=0}">
+        <button class="btn btn-info mt-3" data-toggle="modal" data-target="#unblock">Розблокувати</button>
+            <div class="modal fade" id="unblock" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Розблокувати користувача</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pb-0">
+                    <p>Ви дійсно хочете розблокувати користувача ?</p>
+
+                </div>
+                <div class="modal-footer pb-0">
+                    <form method="post" action="admin">
+                        <input type="hidden" name="userID" value="<c:out value='${temp_user.id}' />"/>
+                        <input class="invisible" name="isBlocked" value="unblock">
+                        <input class="btn btn-success" type="submit" value="Заблокувати">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
         </c:if>
 
     </div>

@@ -35,7 +35,7 @@
                     <input class="form-control" type="text" name="Name"
                            id="new_name" required>
                     <div class="invalid-feedback">
-                        Please enter Faculty Name.
+                       Введіть назву факультету.
                     </div>
                 </div>
                 <div>
@@ -44,36 +44,46 @@
                     <input class="form-control" type="text" name="Description"
                            id="new_description" required>
                     <div class="invalid-feedback">
-                        Please enter Description.
+                        Введіть опис.
                     </div>
                 </div>
                 <div>
                     <label class="form-text text-muted"
-                           for="new_Count_of_places">Count_of_places</label>
+                           for="new_Count_of_places">Загальна кількість місць</label>
                     <input class="form-control" type="number" name="Count_of_places"
                            id="new_Count_of_places" required>
                     <div class="invalid-feedback">
-                        Please enter Count_of_places.
+                        Введіть загальну кількість місць.
                     </div>
                 </div>
                 <div>
                     <label class="form-text text-muted"
-                           for="new_Count_of_public_places">Count_of_public_places</label>
+                           for="new_Count_of_public_places">Кількість державних місць</label>
                     <input class="form-control" type="number" name="Count_of_public_places"
                            id="new_Count_of_public_places" required>
                     <div class="invalid-feedback">
-                        Please enter Count_of_places.
+                        Введіть кількість державних місць.
                     </div>
                 </div>
                 <div>
                     <label class="form-text text-muted"
-                           for="new_Count_of_paid_places">Count_of_paid_places</label>
+                           for="new_Count_of_paid_places">Кількість платних місць</label>
                     <input class="form-control" type="number" name="Count_of_paid_places"
                            id="new_Count_of_paid_places" required>
                     <div class="invalid-feedback">
-                        Please enter Count_of_places.
+                        Введіть кількість платних місць.
                     </div>
                 </div>
+            <div>
+                <label class="form-text text-muted"
+                       for="new_ImgLogo">Кількість платних місць</label>
+                <input class="form-control" type="text" name="ImgLogo"
+                       id="new_ImgLogo" required>
+                <div class="invalid-feedback">
+                    Введіть кількість платних місць.
+                </div>
+            </div>
+
                 <hr>
                 <div class="row">
                     <input class="invisible" name="action" value="add">

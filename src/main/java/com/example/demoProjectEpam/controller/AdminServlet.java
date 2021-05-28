@@ -41,11 +41,11 @@ public class AdminServlet extends HttpServlet {
         switch (isBlocked) {
             case "block":
                 usersDao.blockUser(userID);
-                response.sendRedirect("admin#users");
+                response.sendRedirect("UserInfo?userId=" + userID);
                 break;
             case "unblock":
                 usersDao.unBlockUser(userID);
-                response.sendRedirect("admin#users");
+                response.sendRedirect("UserInfo?userId=" + userID);
                 break;
 
         }

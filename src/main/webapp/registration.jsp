@@ -30,8 +30,8 @@
 <div style="width: 100%" class="row justify-content-md-center mt-10">
     <div class="col col-auto">
         <h1 class="text-center mb-4">Registration</h1>
-        <form class="needs-validation m-2" novalidate
-              method="post" action="register">
+        <form class="needs-validation m-2" novalidate action="register"
+              method="post" >
             <br/>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -55,9 +55,6 @@
             </div>
             <br/>
             <div class="input-group mb-3">
-                <%--                <label class="form-text text-muted"--%>
-                <%--                       for="new_login">Email</label>--%>
-                <%--                <hr>--%>
                 <input class="form-control" type="text" placeholder="Email" name="email"
                        id="new_login" aria-describedby="basic-addon2" required>
                 <div class="input-group-append">
@@ -85,7 +82,7 @@
                 <input class="form-control" type="text" name="region"
                        id="new_region" required>
                 <div class="invalid-feedback">
-                    Please enter your Regoin.
+                    Please enter your Region.
                 </div>
             </div>
             <div>
@@ -109,10 +106,7 @@
                     Please provide a valid password
                 </div>
             </div>
-<%--            <div class="form-group">--%>
-<%--                <label for="new_inputStream">Example file input</label>--%>
-<%--                <input type="file" class="form-control-file" id="new_inputStream">--%>
-<%--            </div>--%>
+
             <div>
                 <label class="form-text text-muted"
                        for="new_password1">Confirm Password</label>
@@ -209,7 +203,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2021 Copyright:
-        <a class="text-white" href="/">SmartOwl.com</a>
+        <a class="text-white" href="/">SelectionCommittee.com</a>
     </div>
     <!-- Copyright -->
 </footer>

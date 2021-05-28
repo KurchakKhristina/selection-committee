@@ -34,6 +34,8 @@ public class ApplicationServlet extends HttpServlet {
         int facultyID = Integer.parseInt(request.getParameter("facultyID"));
 
         Integer userID = (Integer) session.getAttribute("userID");
+
+
         request.setAttribute("temp_user", usersDao.getUsersById(userID));
         request.setAttribute("temp_faculty", facultyDao.getFacultyById(facultyID));
         session.setAttribute("faculty_id", facultyID);
@@ -58,15 +60,7 @@ public class ApplicationServlet extends HttpServlet {
         int facultyID = Integer.parseInt(request.getParameter("faculty_id"));
         Integer userID = (Integer) session.getAttribute("userId");
 
-//        int subId = Integer.parseInt(request.getParameter("subjectId"));
-//        request.setAttribute("subjectId", subId);
-//
-//        int examMark = Integer.parseInt(request.getParameter("examMark"));
-//        request.setAttribute("examMark", examMark);
-//
-//        int certificateMark = Integer.parseInt(request.getParameter("certificateMark"));
-//        request.setAttribute("certificateMark", certificateMark);
-//
+
         applicationDao.addApplication(facultyID, userID);
 
         Map<String, String[]> parametersMap = request.getParameterMap();

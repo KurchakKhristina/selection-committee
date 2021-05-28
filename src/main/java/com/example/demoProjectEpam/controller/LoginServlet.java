@@ -25,20 +25,20 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = new User();
         String email = request.getParameter("login");
         int id = userDAO.getId(email);
-        String password = request.getParameter("password");
+        boolean blocked = Boolean.parseBoolean(request.getParameter("blocked"));
 
-        String role = (String) request.getAttribute("role");
-
-        if (role == null ) response.sendRedirect("index.jsp");
+        String role = userDAO.getRole(id);
+        System.out.println(role);
+        if (role == null) response.sendRedirect("index.jsp");
         else {
             HttpSession session = request.getSession();
             session.setAttribute("id", session.getId());
             session.setAttribute("username", email);
             session.setAttribute("userId", id);
             session.setAttribute("role", role);
+            session.setAttribute("blocked", blocked);
 
             if (role.equals("User")) response.sendRedirect("facultyList");
             if (role.equals("Admin")) response.sendRedirect("admin");

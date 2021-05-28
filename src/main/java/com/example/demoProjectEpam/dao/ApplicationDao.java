@@ -93,4 +93,33 @@ public class ApplicationDao {
 
         return 0;
     }
+
+    public boolean checkIfApplicationExist(int userId, int facultyId) {
+        String sql = "select * from application where user_id= ? and faculty_id = ?";
+
+        ResultSet resultSet = null;
+
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, userId);
+            statement.setInt(2, facultyId);
+            statement.execute();
+
+            resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+        }
+
+        return false;
+    }
+
+
 }
