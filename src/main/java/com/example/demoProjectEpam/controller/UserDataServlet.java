@@ -28,6 +28,12 @@ public class UserDataServlet extends HttpServlet {
         int userID = Integer.parseInt(request.getParameter("userId"));
         System.out.println(userID);
 
+        List<Faculty> faculty = applicationDao.getAplicationByUserId(userID);
+        for (Faculty faculty1 : faculty) {
+            System.out.println((faculty1));
+        }
+        request.setAttribute("f_temp", faculty);
+
         User user = usersDao.getUsersById(userID);
         request.setAttribute("temp_user", user);
         request.getRequestDispatcher("userData.jsp").forward(request, response);

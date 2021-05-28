@@ -28,10 +28,18 @@ public class FacultyListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
         Integer userID = (Integer) session.getAttribute("userId");
-
-        request.setAttribute("faculty_list", facultyDao.getFaculty());
+//
+//        String sort = request.getParameter("sort");
+//        String order = request.getParameter("order");
+//        request.setAttribute("sort_param", sort);
+//        request.setAttribute("order_param", order);
+//
+        int startPage = Integer.parseInt(request.getParameter("page"));
+        int start = (startPage - 1) * FacultyDao.LIMIT;
+        int pages = 2;
+        request.setAttribute("pages", pages);
+        request.setAttribute("faculty_list", facultyDao.getFaculty(start));
         request.setAttribute("user_list",usersDao.getUsersById(userID));
 
 

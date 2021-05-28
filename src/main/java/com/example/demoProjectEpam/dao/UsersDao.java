@@ -6,10 +6,15 @@ import com.example.demoProjectEpam.entity.User;
 import com.example.demoProjectEpam.repository.UserRepository;
 
 import javax.naming.NamingException;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +36,22 @@ public class UsersDao implements UserRepository {
         dbManager = new DBManager();
     }
 
+    public static String cryptWithMD5(String pass){
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for(int i=0;i<digested.length;i++){
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     @Override
     public boolean addUser(Map<String, String[]> parametersMap) {
@@ -38,7 +59,8 @@ public class UsersDao implements UserRepository {
 
         try (Connection connection = dbManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-
+            cryptWithMD5(PASSWORD);
+            System.out.println(PASSWORD);
             int k = 0;
             statement.setString(++k, parametersMap.get(LASTNAME)[0]);
             statement.setString(++k, parametersMap.get(FIRSTNAME)[0]);
@@ -48,7 +70,6 @@ public class UsersDao implements UserRepository {
             statement.setString(++k, parametersMap.get(REGION)[0]);
             statement.setString(++k, parametersMap.get(STUDY_PLACE)[0]);
             statement.setString(++k, parametersMap.get(PASSWORD)[0]);
-
 
             statement.execute();
             System.out.println(1);
@@ -60,6 +81,8 @@ public class UsersDao implements UserRepository {
 
         return true;
     }
+
+
 
     // Registration validation:
     public boolean checkEmail(String email) {
@@ -152,6 +175,7 @@ public class UsersDao implements UserRepository {
         try (Connection connection = dbManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             resultSet = statement.executeQuery();
+
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
@@ -163,6 +187,7 @@ public class UsersDao implements UserRepository {
                 user.setRegion(resultSet.getString("Region"));
                 user.setStudyPlace(resultSet.getString("Study_Place"));
                 user.setBlocked(resultSet.getString("Blocked"));
+                user.setRole(resultSet.getString("role"));
 
                 users.add(user);
 
@@ -199,6 +224,8 @@ public class UsersDao implements UserRepository {
                 user.setRegion(resultSet.getString("Region"));
                 user.setStudyPlace(resultSet.getString("Study_Place"));
                 user.setBlocked(resultSet.getString("Blocked"));
+                user.setRole(resultSet.getString("role"));
+
 
             }
 
@@ -278,22 +305,14 @@ public class UsersDao implements UserRepository {
         }
     }
 
-
-
-
     public void unBlockUser(int id) {
-        String sql = "update users set blocked= 0 where id = ?";
-        Connection connection = null;
+        String sql = "update users set blocked = 0 where id = ?";
 
-        try {
-            connection = dbManager.getConnection();
-            connection.setAutoCommit(false);
-            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int k = 0;
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(++k, id);
-
+            statement.setInt(1, id);
+            statement.execute();
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }

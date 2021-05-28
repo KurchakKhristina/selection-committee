@@ -31,18 +31,15 @@ public class LoginServlet extends HttpServlet {
 
         String role = userDAO.getRole(id);
         System.out.println(role);
-        if (role == null) response.sendRedirect("index.jsp");
-        else {
-            HttpSession session = request.getSession();
-            session.setAttribute("id", session.getId());
-            session.setAttribute("username", email);
-            session.setAttribute("userId", id);
-            session.setAttribute("role", role);
-            session.setAttribute("blocked", blocked);
 
-            if (role.equals("User")) response.sendRedirect("facultyList");
-            if (role.equals("Admin")) response.sendRedirect("admin");
-        }
+        HttpSession session = request.getSession();
+        session.setAttribute("id", session.getId());
+        session.setAttribute("username", email);
+        session.setAttribute("userId", id);
+        session.setAttribute("role", role);
+        session.setAttribute("blocked", blocked);
 
+        response.sendRedirect("index.jsp");
     }
+
 }

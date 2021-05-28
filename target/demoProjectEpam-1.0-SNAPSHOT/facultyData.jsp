@@ -191,8 +191,6 @@
     </c:choose>
     <c:if test="${role == admin}">
    <br />
-   <br />
-   <br />
     <div class="row">
         <div class="m-2">
             <button style="margin-right: auto" class="btn btn-warning" data-toggle="modal" data-target="#edit">

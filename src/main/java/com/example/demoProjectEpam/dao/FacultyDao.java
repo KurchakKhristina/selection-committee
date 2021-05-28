@@ -14,26 +14,28 @@ import static com.example.demoProjectEpam.dao.UsersDao.close;
 
 public class FacultyDao {
     private static final String TABLE_NAME = "Faculty";
-
+    public static final int LIMIT = 5;
     private final DBManager dbManager;
 
     public FacultyDao() {
         dbManager = new DBManager();
     }
 
-    public List<Faculty> getFaculty() {
-        String sql = "select * from " + TABLE_NAME;
+    public List<Faculty> getFaculty(int start ) {
+        String sql = "select * from " + TABLE_NAME
+                + " limit ?" + LIMIT;
+//        + " where 1=1 "+ "order by " + sort + " " + order;
         List<Faculty> faculties = new ArrayList<>();
         ResultSet resultSet = null;
 
         try (Connection connection = dbManager.getConnection();
-             Statement statement = connection.createStatement()) {
-
-            resultSet = statement.executeQuery(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, start);
+            resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 Faculty faculty = new Faculty();
-                faculty.setId(resultSet.getLong("id"));
+                faculty.setId(resultSet.getInt("id"));
                 faculty.setName(resultSet.getString("name"));
                 faculty.setCount_of_places(resultSet.getInt("Count_of_place"));
                 faculty.setCount_of_paid_places(resultSet.getInt("Count_of_paid_place"));
@@ -106,13 +108,13 @@ public class FacultyDao {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1,faculty.getName());
-           statement.setInt(2,faculty.getCount_of_places());;
-           statement.setInt(3,faculty.getCount_of_public_places());
-           statement.setInt(4,faculty.getCount_of_paid_places());
-           statement.setString(5,faculty.getDescription());
-           statement.setString(6,faculty.getLogo());
-           statement.setLong(7, faculty.getId());
-           rowDelete = statement.executeUpdate() > 0;
+            statement.setInt(2,faculty.getCount_of_places());;
+            statement.setInt(3,faculty.getCount_of_public_places());
+            statement.setInt(4,faculty.getCount_of_paid_places());
+            statement.setString(5,faculty.getDescription());
+            statement.setString(6,faculty.getLogo());
+            statement.setLong(7, faculty.getId());
+            rowDelete = statement.executeUpdate() > 0;
 
         } catch (SQLException | NamingException e) {
             e.printStackTrace();

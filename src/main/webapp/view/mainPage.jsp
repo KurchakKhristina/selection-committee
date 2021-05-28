@@ -77,8 +77,18 @@
     </div>
     </c:when>
         <c:otherwise>
-        <a href="facultyList#faculty" class="button button2  btn-lg" >Обрати факультет</a>
-    </div>
+<%--    <div class="section" id="home">--%>
+        <div class="row">
+            <div class="center">
+                <c:if test="${role=='User'}">
+        <a href="facultyList?page=1" class="button button2  btn-lg" >Обрати факультет</a>
+                </c:if>
+                <c:if test="${role=='Admin'}">
+                    <a href="facultyList?page=1" class="button button2 btn-lg scroll-btn" data-target="#faculty">Список
+                        факультетів</a>
+                </c:if>
+            </div>
+        </div>
     </c:otherwise>
     </c:choose>
 

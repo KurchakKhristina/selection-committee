@@ -27,7 +27,6 @@ public class UserCabinetServlet extends HttpServlet {
 
         Integer userID = (Integer) session.getAttribute("userId");
         System.out.println(userID);
-//        session.setAttribute("id", session.getId());
         session.setAttribute("userId",userID);
 
         User user = usersDao.getUsersById(userID);

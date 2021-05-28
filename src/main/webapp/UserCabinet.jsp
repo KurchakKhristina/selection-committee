@@ -38,8 +38,8 @@
 </div>
 </c:if>
 <c:if test="${temp_u.blocked==0}">
-<div class="row row-cols-2">
-    <div class="col-sm-4" style="margin-left: 60px">
+<div class="row ">
+    <div class="col-sm-6" style="margin-left: 60px">
         <div class="page-content" style="margin-top: 40px">
             <div class="wrap">
                 <div class="tabs-container">
@@ -56,12 +56,12 @@
         </div>
     </div>
 
-    <div class="col-sm-8" style="margin-left: 60px">
+    <div class="col-sm-4" style="margin-left: 60px">
         <div class="page-content" style="margin-top: 40px">
             <div class="wrap">
                 <div class="tabs-container">
                     <div class="tab info active" style="display: block">
-                        <h4>Я подала заявки на факультети:</h4>
+                        <h4>Мої заявки:</h4>
                         <div class="m-2">
 
                             <table class="table table-hover">

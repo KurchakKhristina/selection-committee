@@ -109,6 +109,8 @@ ALTER TABLE report
     add foreign key (faculty_id) references Faculty(ID);
 ALTER TABLE report
     add foreign key (application_id) references application(ID);
+ALTER TABLE report
+    add foreign key (status_id) references status(ID);
 
 ALTER TABLE subject_on_faculty
     ADD foreign key (Faculty_id) references Faculty (ID);

@@ -35,9 +35,15 @@
                                     <input class="invisible" value="${userId}">
                                     <a class="btn btn-warning" type="button" href="myCabinetServlet">Мій кабінет</a>
                                 </li>
+                                </c:if>
+                                <c:if test="${role == 'Admin'}">
+                                <li style="margin-left: 5px" class="nav-item active">
+                                    <a class="btn btn-warning" type="button" href="userList">Список користувачів</a>
+                                </li>
+                                </c:if>
+
                         </div>
                     </div>
-                    </c:if>
                 </div>
             </div>
 

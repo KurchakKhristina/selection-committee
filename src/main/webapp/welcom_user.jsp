@@ -32,58 +32,158 @@
     }
 %>
 <%@ include file="header.jsp" %>
+<c:set value="page" var="page_param"/>
+<c:set value="sort" var="sort_param"/>
+<c:set value="order" var="order_param"/>
+<c:if test="${role != null}">
+    <c:url value="facultyList" var="link">
+        <c:param name="${page_param}" value="${param.get(page_param)}"/>
+        <c:param name="${sort_param}" value="${param.get(sort_param)}"/>
+        <c:param name="${order_param}" value="${param.get(order_param)}"/>
+    </c:url>
+</c:if>
+
+
 <c:choose>
+    <c:when test="${user_list.blocked == 0}">
+<%--        <div class="section" id="home">--%>
+<%--            <div class="row">--%>
+<%--                <div class="center">--%>
+<%--                    <c:if test="${role=='User'}">--%>
+<%--                        <a href="#faculty" class="button button2 btn-lg scroll-btn" data-target="#faculty">Обрати--%>
+<%--                            факультет</a>--%>
+<%--                    </c:if>--%>
+<%--                    <c:if test="${role=='Admin'}">--%>
+<%--                        <a href="#faculty" class="button button2 btn-lg scroll-btn" data-target="#faculty">Список--%>
+<%--                            факультетів</a>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="section" id="faculty">--%>
+            <div class="m-2">
 
-<c:when test="${user_list.blocked == 0}">
-    <div class="section" id="home">
-        <div class="row">
-            <div class="center">
-                <a href="#faculty" class="button button2 btn-lg scroll-btn" data-target="#faculty">Обрати факультет</a>
-            </div>
-        </div>
-    </div>
-    <div class="section" id="faculty">
-        <div class="m-2">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <td>Назва</td>
-                    <td>Кількість місць</td>
-                </tr>
-                </thead>
-                <c:forEach items="${faculty_list}" var="faculty_list">
-                    <tbody>
+                <table class="table table-hover">
+                    <thead>
                     <tr>
-                        <c:url var="facultyLink" value="facultyInfo">
-                            <c:param name="facultyID" value="${faculty_list.id}"/>
-                        </c:url>
-
-                        <td>
-                            <a style="text-decoration: blue" href="${facultyLink}">
-                                <button class="btn btn-light but">
-                                        ${faculty_list.name}
-                                </button>
-                            </a>
-                        </td>
-                        <td><c:out value="${faculty_list.count_of_places}"/></td>
+                        <c:if test="${role != null}">
+                            <th>
+                                Назва
+                                <jsp:include page="fragments/sorting.jsp">
+                                    <jsp:param name="sort" value="name"/>
+                                </jsp:include>
+                            </th>
+                        </c:if>
+                        <th>
+                            Кількість місць
+                            <c:if test="${role != null}">
+                                <jsp:include page="fragments/sorting.jsp">
+                                    <jsp:param name="sort" value="count_of_place"/>
+                                </jsp:include>
+                            </c:if>
+                        </th>
+                        <th>
+                            Кількість державних місць
+                            <c:if test="${role != null}">
+                                <jsp:include page="fragments/sorting.jsp">
+                                    <jsp:param name="sort" value="count_of_public_place"/>
+                                </jsp:include>
+                            </c:if>
+                        </th>
                     </tr>
-                    </tbody>
-                </c:forEach>
-            </table>
-        </div>
-    </div>
-</c:when>
-<c:otherwise>
-    <div class="row">
-        <div class="center ">
-            <div class="col d-flex align-items-center bg-danger text-white" style="text-align: center">
-                <h2 class="text-center" style="margin-left:50px;text-align: center">Ви не можете переглянти дані.
-                    Ваш акаунт заблоковано адміністратором!</h2>
+                    </thead>
+                        <tbody>
+                    <c:forEach items="${faculty_list}" var="faculty_list">
+                        <tr>
+                            <c:url var="facultyLink" value="facultyInfo">
+                                <c:param name="facultyID" value="${faculty_list.id}"/>
+                            </c:url>
+
+                            <td>
+                                <a style="text-decoration: blue" href="${facultyLink}">
+                                    <button class="btn btn-light but">
+                                            ${faculty_list.name}
+                                    </button>
+                                </a>
+                            </td>
+                            <td><c:out value="${faculty_list.count_of_places}"/></td>
+                            <td><c:out value="${faculty_list.count_of_public_places}"/></td>
+                        </tr>
+                    </c:forEach>
+                        </tbody>
+                </table>
+            </div>
+<%--        </div>--%>
+    </c:when>
+    <c:otherwise>
+        <div class="row">
+            <div class="center ">
+                <div class="col d-flex align-items-center bg-danger text-white" style="text-align: center">
+                    <h2 class="text-center" style="margin-left:50px;text-align: center">Ви не можете переглянти дані.
+                        Ваш акаунт заблоковано адміністратором!</h2>
+                </div>
             </div>
         </div>
-    </div>
-</c:otherwise>
+    </c:otherwise>
 </c:choose>
+
+<nav aria-label="Page navigation example">
+    <ul class="mt-2 pagination justify-content-center">
+        <%--@elvariable id="pages" type="java.lang.Integer"--%>
+
+        <%--Control current page--%>
+        <c:set value="${param.get('page')}" var="current_page"/>
+
+        <%--First page--%>
+        <jsp:include page="fragments/pagination.jsp">
+            <jsp:param name="servlet" value="${servlet}"/>
+            <jsp:param name="page" value="1"/>
+            <jsp:param name="name" value="First"/>
+        </jsp:include>
+
+        <%--Disable 'Previous' page--%>
+        <c:if test="${current_page == 1}">
+            <c:set value="disabled" var="disabled_previous"/>
+        </c:if>
+
+        <%--Previous page--%>
+        <jsp:include page="fragments/pagination.jsp">
+            <jsp:param name="disable_pr" value="${disabled_previous}"/>
+            <jsp:param name="servlet" value="${servlet}"/>
+            <jsp:param name="page" value="${current_page - 1}"/>
+            <jsp:param name="name" value="Previous"/>
+        </jsp:include>
+
+        <%--All pages--%>
+        <c:forEach begin="1" end="${pages}" varStatus="loop">
+            <jsp:include page="fragments/pagination.jsp">
+                <jsp:param name="servlet" value="${servlet}"/>
+                <jsp:param name="page" value="${loop.index}"/>
+                <jsp:param name="name" value="${loop.index}"/>
+            </jsp:include>
+        </c:forEach>
+
+        <%--Disable 'Next' page--%>
+        <c:if test="${current_page == pages}">
+            <c:set value="disabled" var="disabled_next"/>
+        </c:if>
+
+        <%--Next page--%>
+        <jsp:include page="fragments/pagination.jsp">
+            <jsp:param name="disable_next" value="${disabled_next}"/>
+            <jsp:param name="servlet" value="${servlet}"/>
+            <jsp:param name="page" value="${current_page + 1}"/>
+            <jsp:param name="name" value="Next"/>
+        </jsp:include>
+
+        <%--Last page--%>
+        <jsp:include page="fragments/pagination.jsp">
+            <jsp:param name="servlet" value="${servlet}"/>
+            <jsp:param name="page" value="${pages}"/>
+            <jsp:param name="name" value="Last"/>
+        </jsp:include>
+    </ul>
+</nav>
 </body>
 </html>
 
